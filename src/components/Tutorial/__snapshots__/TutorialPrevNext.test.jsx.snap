@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: <TutorialPrevNext /> renders correctly 1`] = `
+<DocumentFragment>
+  <div>
+    <a
+      href="/asdf/previous"
+    >
+      ← Previous tutorial
+    </a>
+    <a
+      href="/asdf/next"
+    >
+      Next tutorial→
+    </a>
+  </div>
+</DocumentFragment>
+`;

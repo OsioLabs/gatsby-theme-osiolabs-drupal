@@ -1,0 +1,167 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: <Collection /> renders correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="ui container"
+  >
+    <div>
+      <p>
+        Copy goes here ...
+      </p>
+    </div>
+    <div
+      class="ui segment"
+    >
+      <h2>
+        Tutorials in this collection:
+      </h2>
+      <div
+        class="ui items"
+      >
+        <div
+          class="item tutorial--item"
+        >
+          <div
+            class="content"
+          >
+            <div
+              class="ui circular label"
+            >
+              1
+            </div>
+          </div>
+          <div
+            class="content"
+          >
+            <div
+              class="header"
+            >
+              <a
+                href="/tutorial/one"
+              >
+                Tutorial One
+              </a>
+            </div>
+            <div
+              class="meta"
+            >
+              <i
+                aria-label="Tutorial contains text"
+                class="file text icon"
+              />
+              <i
+                aria-label="Tutorial has one or more videos"
+                class="video play icon"
+              />
+               3 minutes
+            </div>
+          </div>
+          <div
+            class="content"
+          >
+            <i
+              aria-label="Membership required. Preview available"
+              class="lock large icon"
+            />
+          </div>
+        </div>
+        <div
+          class="item tutorial--item"
+        >
+          <div
+            class="content"
+          >
+            <div
+              class="ui circular label"
+            >
+              2
+            </div>
+          </div>
+          <div
+            class="content"
+          >
+            <div
+              class="header"
+            >
+              <a
+                href="/tutorial/two"
+              >
+                Tutorial Two
+              </a>
+            </div>
+            <div
+              class="meta"
+            >
+              <i
+                aria-label="Tutorial contains text"
+                class="file text icon"
+              />
+              <i
+                aria-label="Tutorial has one or more videos"
+                class="video play icon"
+              />
+               3 minutes
+            </div>
+          </div>
+          <div
+            class="content"
+          >
+            <i
+              aria-label="Membership required. Preview available"
+              class="lock large icon"
+            />
+          </div>
+        </div>
+        <div
+          class="item tutorial--item"
+        >
+          <div
+            class="content"
+          >
+            <div
+              class="ui circular label"
+            >
+              3
+            </div>
+          </div>
+          <div
+            class="content"
+          >
+            <div
+              class="header"
+            >
+              <a
+                href="/tutorial/three"
+              >
+                Tutorial Three
+              </a>
+            </div>
+            <div
+              class="meta"
+            >
+              <i
+                aria-label="Tutorial contains text"
+                class="file text icon"
+              />
+              <i
+                aria-label="Tutorial has one or more videos"
+                class="video play icon"
+              />
+               3 minutes
+            </div>
+          </div>
+          <div
+            class="content"
+          >
+            <i
+              aria-label="Membership required. Preview available"
+              class="lock large icon"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

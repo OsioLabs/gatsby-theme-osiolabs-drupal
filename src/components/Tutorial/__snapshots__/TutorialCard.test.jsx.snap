@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: <TutorialCard /> renders correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="ui card false false"
+  >
+    <div
+      class="content"
+    >
+      <a
+        class="header"
+        href="/tutorial/tacos"
+      >
+        Tacos Rock 
+        <i
+          aria-label="Membership required. Preview available"
+          class="red lock small fitted icon"
+        />
+      </a>
+      <div
+        class="description"
+      >
+        This is some text.
+      </div>
+    </div>
+    <div
+      class="content"
+    >
+      <div
+        class="meta left floated"
+      />
+      <a
+        class="right floated"
+        href="/tutorial/tacos"
+      >
+        Preview
+        <i
+          aria-hidden="true"
+          class="angle double right icon"
+        />
+      </a>
+    </div>
+  </div>
+</DocumentFragment>
+`;

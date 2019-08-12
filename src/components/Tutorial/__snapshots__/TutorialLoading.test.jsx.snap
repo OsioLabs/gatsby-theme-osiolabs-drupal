@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: <TutorialLoading /> renders correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="ui container"
+  >
+    TutorialTeaser
+    <p />
+    <div
+      class="ui fluid placeholder"
+    >
+      <div
+        class="header"
+      >
+        <div
+          class="line"
+        />
+      </div>
+      <div
+        class="paragraph"
+      >
+        <div
+          class="line"
+        />
+        <div
+          class="line"
+        />
+        <div
+          class="line"
+        />
+        <div
+          class="line"
+        />
+        <div
+          class="line"
+        />
+      </div>
+      <div
+        class="header"
+      >
+        <div
+          class="line"
+        />
+      </div>
+      <div
+        class="paragraph"
+      >
+        <div
+          class="line"
+        />
+        <div
+          class="line"
+        />
+        <div
+          class="line"
+        />
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

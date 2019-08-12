@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: <TutorialTeaser /> renders correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="ui container"
+  >
+    <h1
+      class="ui header"
+    >
+      Tacos Rock
+    </h1>
+    <div>
+      <p>
+        Tacos 
+        <strong>
+          go here
+        </strong>
+         ...
+      </p>
+    </div>
+  </div>
+</DocumentFragment>
+`;

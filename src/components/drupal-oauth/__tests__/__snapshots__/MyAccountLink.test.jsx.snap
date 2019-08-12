@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<MyAccountLink /> renders correctly 1`] = `
+<DocumentFragment>
+  <a
+    class="testClassName"
+    href="http://api.example.com/user?consumerId=CLIENTID"
+  >
+    My account
+  </a>
+</DocumentFragment>
+`;

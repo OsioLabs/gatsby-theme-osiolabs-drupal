@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: <SignupNag /> renders correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="ui horizontal segments"
+  >
+    <div
+      class="ui center aligned segment"
+    >
+      <p>
+        Sign in with your Osio Labs account
+        <br />
+        to gain instant access to our entire library.
+      </p>
+    </div>
+    <div
+      class="ui center aligned segment"
+    >
+      LoginRegisterButtonGroup
+    </div>
+  </div>
+</DocumentFragment>
+`;

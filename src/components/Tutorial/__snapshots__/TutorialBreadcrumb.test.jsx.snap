@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: <TutorialBreadcrumb /> renders correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="ui breadcrumb"
+  >
+    <a
+      class="section"
+      href="/"
+    >
+      Home
+    </a>
+    <i
+      aria-hidden="true"
+      class="right chevron icon divider"
+    />
+    <a
+      class="section"
+      href="/collection/tacos"
+    >
+      Tacos Rock
+    </a>
+    <i
+      aria-hidden="true"
+      class="right chevron icon divider"
+    />
+  </div>
+</DocumentFragment>
+`;

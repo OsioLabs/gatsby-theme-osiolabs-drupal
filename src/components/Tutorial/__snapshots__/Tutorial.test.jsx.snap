@@ -1,0 +1,109 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: <Tutorial /> renders access deined 1`] = `
+<div
+  class="ui container"
+>
+  <h1
+    class="ui header"
+  >
+    Tacos Rock
+  </h1>
+  <div>
+    <p>
+      Tacos 
+      <strong>
+        go here
+      </strong>
+       ...
+    </p>
+  </div>
+  <p />
+  <div
+    class="ui container tutrial--access-denied"
+  >
+    <div
+      class="ui small header"
+    >
+      Access denied:
+    </div>
+    <p>
+      Your account does not have permission to view the complete content of this tutorial. If you believe this is an error please contact support.
+    </p>
+  </div>
+</div>
+`;
+
+exports[`Component: <Tutorial /> renders an error 1`] = `
+<div
+  class="ui container"
+>
+  <h1
+    class="ui header"
+  >
+    Tacos Rock
+  </h1>
+  <div
+    class="ui red basic label"
+  >
+    Unable to load tutorial content. 
+    Error: Oh no, we're all out of cake.
+  </div>
+  <div>
+    <p>
+      Tacos 
+      <strong>
+        go here
+      </strong>
+       ...
+    </p>
+  </div>
+  <p />
+  <div
+    class="ui container tutrial--access-denied"
+  >
+    <div
+      class="ui small header"
+    >
+      Access denied:
+    </div>
+    <p>
+      Your account does not have permission to view the complete content of this tutorial. If you believe this is an error please contact support.
+    </p>
+  </div>
+</div>
+`;
+
+exports[`Component: <Tutorial /> renders correctly 1`] = `
+<div
+  class="ui container"
+>
+  <h1
+    class="ui header"
+  >
+    Tacos Rock
+  </h1>
+  <div>
+    <p>
+      Tacos 
+      <strong>
+        go here
+      </strong>
+       ...
+    </p>
+  </div>
+  <p />
+  <div
+    class="ui container tutrial--access-denied"
+  >
+    <div
+      class="ui small header"
+    >
+      Access denied:
+    </div>
+    <p>
+      Your account does not have permission to view the complete content of this tutorial. If you believe this is an error please contact support.
+    </p>
+  </div>
+</div>
+`;
