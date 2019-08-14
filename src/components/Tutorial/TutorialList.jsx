@@ -10,10 +10,9 @@ const TutorialList = ({ tutorials }) => (
         title={item.title}
         path={item.path}
         sequence={index + 1}
-        key={index + 1}
-        hasText
-        hasVideo
-        timeToComplete="3 minutes"
+        key={item.id}
+        isPublic={item.tutorial_access === 'public'}
+        isComingSoon={item.tutorial_access === 'coming_soon'}
       />
     ))}
   </Item.Group>

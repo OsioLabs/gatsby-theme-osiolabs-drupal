@@ -1,18 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Container, Segment } from 'semantic-ui-react';
+import { Container, Header, Image, Grid } from 'semantic-ui-react';
 import TutorialList from '../Tutorial/TutorialList';
 
-const Collection = ({ summary, tutorials }) => (
-  <Container>
-    <div dangerouslySetInnerHTML={{ __html: summary }} />
-
-    {tutorials && tutorials.length > 0 && (
-      <Segment>
-        <h2>Tutorials in this collection:</h2>
-        <TutorialList tutorials={tutorials} />
-      </Segment>
-    )}
+const Collection = ({ title, summary, tutorials }) => (
+  <Container className="collection">
+    <Grid columns={1} stackable centered>
+      <Grid.Row>
+        <Grid.Column computer={7} tablet={10} mobile={12} relaxed>
+          <Header as="h1">{title}</Header>
+          <Container dangerouslySetInnerHTML={{ __html: summary }} />
+          {tutorials && tutorials.length > 0 && (
+            <>
+              <Header as="h2">Tutorials in this collection</Header>
+              <TutorialList tutorials={tutorials} />
+            </>
+          )}
+        </Grid.Column>
+      </Grid.Row>
+    </Grid>
   </Container>
 );
 
