@@ -1,11 +1,10 @@
 {
   "name": "gatsby-theme-osiolabs-drupal",
   "description": "Base theme for integrating with members.osiolabs.com.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Joe Shindelar <joe@osiolabs.com>",
   "main": "index.js",
   "dependencies": {
-    "@emotion/core": "^10.0.10",
     "async-retry": "^1.2.3",
     "dotenv": "^6.1.0",
     "gatsby-image": "^2.0.15",
@@ -23,6 +22,7 @@
     "semantic-ui-react": "^0.86.0"
   },
   "peerDependencies": {
+    "gatsby": "^2.13.62",
     "react": "^16.5",
     "react-dom": "^16.5",
     "semantic-ui-react": "^0.86.0"
@@ -41,6 +41,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.1.5",
+    "@testing-library/jest-dom": "^4.0.0",
+    "@testing-library/react": "^9.1.1",
     "babel-core": "^7.0.0-0",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^23.6.0",
@@ -52,12 +54,11 @@
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-prettier": "^3.0.1",
     "eslint-plugin-react": "^7.11.0",
+    "gatsby": "^2.13.62",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^24.8.0",
-    "jest-dom": "^3.2.1",
     "jest-fetch-mock": "^1.7.4",
-    "prettier": "^1.17.0",
-    "react-testing-library": "^8.0.0"
+    "prettier": "^1.17.0"
   },
   "repository": {
     "type": "git",

@@ -19,7 +19,6 @@ module.exports = {
     "<rootDir>/loadershim.js",
   ],
   "setupFilesAfterEnv": [
-    '@testing-library/react/cleanup-after-each',
     "<rootDir>/setup-test-env.js",
   ],
 };
