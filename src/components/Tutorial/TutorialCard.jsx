@@ -59,8 +59,9 @@ class TutorialCard extends React.Component {
             )}
           </Card.Header>
           <Card.Description>
-            {// Split out the first sentence, and then strip all HTML tags from it.
-              summary.split(/\.\s+/)[0].replace(/<(?:.|\n)*?>/gm, '')
+            {
+              // Strip all the HTML tags, and then split out the first sentence.
+              summary.replace(/<(?:.|\n)*?>/gm, '').split(/\.\s+/)[0]
               // The period after this is intentional because it's stripped above.
             }
             .
