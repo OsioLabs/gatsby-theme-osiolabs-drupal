@@ -47,6 +47,11 @@ const TutorialTemplate = props => {
       <SEO
         title={tutorial.title}
         description={tutorial.short_description}
+        image={
+          tutorial.relationships.promotional_image &&
+          tutorial.relationships.promotional_image.relationships.imageFile
+            .localFile.childImageSharp.original.src
+        }
         meta={[{ name: 'og:type', content: 'article' }]}
       />
       <Grid columns={2} stackable>

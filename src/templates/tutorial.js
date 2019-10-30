@@ -43,6 +43,19 @@ export const query = graphql`
             }
           }
         }
+        promotional_image {
+          relationships {
+            imageFile {
+              localFile {
+                childImageSharp {
+                  original {
+                    src
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
