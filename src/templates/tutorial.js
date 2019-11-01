@@ -21,6 +21,7 @@ export const query = graphql`
       body {
         processed
       }
+      short_description
       tutorial_access
       path {
         alias
@@ -38,6 +39,19 @@ export const query = graphql`
               tutorial_access
               path {
                 alias
+              }
+            }
+          }
+        }
+        promotional_image {
+          relationships {
+            imageFile {
+              localFile {
+                childImageSharp {
+                  original {
+                    src
+                  }
+                }
               }
             }
           }
