@@ -29,7 +29,12 @@ exports[`Component: <TutorialCard /> renders correctly 1`] = `
     >
       <div
         class="meta left floated"
-      />
+      >
+        <i
+          aria-label="incomplete"
+          class="grey check circle outline link icon incomplete lightgray"
+        />
+      </div>
       <a
         class="right floated"
         href="/tutorial/tacos"

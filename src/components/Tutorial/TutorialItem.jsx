@@ -4,6 +4,7 @@ import { Link, navigate } from 'gatsby';
 import { Item, Icon, Label } from 'semantic-ui-react';
 
 import withDrupalOauthConsumer from '../drupal-oauth/withDrupalOauthConsumer';
+import TutorialProgressIndicator from './TutorialProgressIndicator';
 
 class TutorialItem extends Component {
   onClick = event => {
@@ -37,6 +38,11 @@ class TutorialItem extends Component {
             </Label>
           </Item.Content>
         )}
+        <Item.Content className="progress">
+          {userAuthenticated &&
+            <TutorialProgressIndicator/>
+          }
+        </Item.Content>
         <Item.Content>
           <Item.Header>
             <Link to={path}>{title}</Link>

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link, navigate } from 'gatsby';
 import { Card, Label, Icon } from 'semantic-ui-react';
+import TutorialProgressIndicator from './TutorialProgressIndicator';
 
 class TutorialCard extends React.Component {
   onClick = event => {
@@ -69,6 +70,9 @@ class TutorialCard extends React.Component {
         </Card.Content>
         <Card.Content>
           <Card.Meta className="left floated">
+            {!userAuthenticated && (
+              <TutorialProgressIndicator complete={false} entityId={1} />
+            )}
             {hasText && (
               <Icon
                 name="file text"

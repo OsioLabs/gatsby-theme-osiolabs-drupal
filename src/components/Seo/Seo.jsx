@@ -64,11 +64,11 @@ function SEO({ description, lang, meta, keywords, title, image }) {
                   ? [
                       {
                         name: `twitter:image`,
-                        content: `${site.siteMetadata.siteUrl}${image}`,
+                        content: `${data.site.siteMetadata.siteUrl}${image}`,
                       },
                       {
                         name: `og:image`,
-                        content: `${site.siteMetadata.siteUrl}${image}`,
+                        content: `${data.site.siteMetadata.siteUrl}${image}`,
                       },
                     ]
                   : []
