@@ -18,19 +18,9 @@ import TutorialLoading from './TutorialLoading';
 import TutorialComingSoon from './TutorialComingSoon';
 import TutorialBreadcrumb from './TutorialBreadcrumb';
 import withDrupalOauthConsumer from '../drupal-oauth/withDrupalOauthConsumer';
-import DrupalOauth from '../drupal-oauth/DrupalOauth';
-import withDrupalOauthProvider from '../drupal-oauth/withDrupalOauthProvider';
 import SEO from '../Seo/Seo';
 import TutorialPrevNext from './TutorialPrevNext';
 import SignupNag from "../SignupNag/SignupNag";
-
-// Initialize a new DrupalOauth client which we can use to seed the context
-// provider.
-const drupalOauthClient = new DrupalOauth({
-  drupal_root: process.env.GATSBY_DRUPAL_API_ROOT,
-  client_id: process.env.GATSBY_DRUPAL_API_ID,
-  client_secret: process.env.GATSBY_DRUPAL_API_SECRET,
-});
 
 const TutorialWithOauthConsumer = withDrupalOauthConsumer(DrupalTutorial);
 
@@ -137,7 +127,4 @@ const TutorialTemplate = props => {
   );
 };
 
-export default withDrupalOauthProvider(
-  drupalOauthClient,
-  withDrupalOauthConsumer(TutorialTemplate)
-);
+export default withDrupalOauthConsumer(TutorialTemplate);

@@ -5,8 +5,8 @@ exports[`Component: <Tutorial /> renders access deined 1`] = `
   class="ui container"
 >
   <i
-    aria-label="complete"
-    class="blue check circle link icon complete"
+    aria-label="loading"
+    class="grey circle notch loading icon loading"
   />
   <h1
     class="ui header"
@@ -43,8 +43,8 @@ exports[`Component: <Tutorial /> renders an error 1`] = `
   class="ui container"
 >
   <i
-    aria-label="complete"
-    class="blue check circle link icon complete"
+    aria-label="loading"
+    class="grey circle notch loading icon loading"
   />
   <h1
     class="ui header"
@@ -87,8 +87,8 @@ exports[`Component: <Tutorial /> renders correctly 1`] = `
   class="ui container"
 >
   <i
-    aria-label="complete"
-    class="blue check circle link icon complete"
+    aria-label="loading"
+    class="grey circle notch loading icon loading"
   />
   <h1
     class="ui header"

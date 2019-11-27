@@ -6,9 +6,10 @@ import useProgressIndicator from '../../hooks/useProgressIndicator';
 const TutorialProgressIndicator = ({
   complete,
   entityId,
+  currentUserId,
   ...rest
 }) => {
-  const [progress, toggleProgress] = useProgressIndicator(complete, entityId);
+  const [progress, markAsRead, markAsUnread] = useProgressIndicator(complete, entityId);
 
   if (progress.loading) {
     return (
@@ -34,7 +35,7 @@ const TutorialProgressIndicator = ({
         onClick={e => {
           e.preventDefault();
           e.stopPropagation();
-          toggleProgress(false, entityId);
+          markAsUnread();
         }}
         color="blue"
       />
@@ -48,10 +49,10 @@ const TutorialProgressIndicator = ({
       aria-label="incomplete"
       className="incomplete lightgray"
       link
-      onClick={(e) => {
+      onClick={e => {
         e.preventDefault();
         e.stopPropagation();
-        toggleProgress(true, entityId);
+        markAsRead();
       }}
       color="grey"
     />
@@ -64,9 +65,14 @@ const TutorialProgressIndicator = ({
 TutorialProgressIndicator.propTypes = {
   // At the time the tutorial is initially display is it
   // complete or incomplete?
-  complete: PropTypes.bool.isRequired,
-  // Drupal ID of the entity that progress tracking relates to.
-  entityId: PropTypes.number.isRequired,
+  complete: PropTypes.bool,
+  // Drupal UUID of the entity that progress tracking relates to.
+  entityId: PropTypes.string.isRequired,
+  currentUserId: PropTypes.string.isRequired,
+};
+
+TutorialProgressIndicator.defaultProps = {
+  complete: null,
 };
 
 const ProgressIndicatorWithPopup = props => (

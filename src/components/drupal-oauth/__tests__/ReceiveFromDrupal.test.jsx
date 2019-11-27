@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { render, cleanup, waitForElement } from '@testing-library/react';
+import { render, cleanup, wait } from '@testing-library/react';
 // Configure some mocks we need to make this component work.
 import DrupalOauth from '../DrupalOauth';
 import withDrupalOauthProvider from '../withDrupalOauthProvider';
@@ -32,22 +32,21 @@ describe('Component: <ReceiveFromDrupal />', () => {
   // Test that the OAuth receive code which is responsible for handling the
   // ?code= param returned during the authentication flow is only rendered when
   // it is needed.
-  it('renders receive component when ?code= is present', () => {
+  it('renders receive component when ?code= is present', async () => {
     // https://www.ryandoll.com/post/2018/3/29/jest-and-url-mocking
     window.history.pushState({}, '', '/test?code=asdf');
 
-    const { getByText } = render(<TestElement />);
-
-    expect(getByText('Authorizing now...')).toBeTruthy();
+    const { getByTestId } = render(<TestElement />);
+    await wait(() => getByTestId('receiver'));
+    expect(getByTestId('receiver')).toBeTruthy();
   });
 
-  it('does not render receive component when ?code= is not present', () => {
+  it('does not render receive component when ?code= is not present', async () => {
     // https://www.ryandoll.com/post/2018/3/29/jest-and-url-mocking
     window.history.pushState({}, '', '/test');
 
-    const { queryByText } = render(<TestElement />);
-
-    expect(queryByText('Authorizing now...')).toBeNull();
+    const { queryByTestId } = render(<TestElement />);
+    expect(queryByTestId('receiver')).toBeFalsy();
   });
 
   // Happy path. :)
@@ -67,7 +66,7 @@ describe('Component: <ReceiveFromDrupal />', () => {
       />
     );
 
-    await waitForElement(() => getAllByTestId('receiver'));
+    await wait(() => getAllByTestId('receiver'));
     expect(drupalOauthClient.fetchOauthToken).toHaveBeenCalledTimes(1);
   });
 
@@ -84,7 +83,7 @@ describe('Component: <ReceiveFromDrupal />', () => {
         currentLocation="http://www.example.com"
       />
     );
-    await waitForElement(() => getByTestId('receiver'));
+    await wait(() => getByTestId('receiver'));
 
     //expect(drupalOauthClient.fetchOauthToken).toHaveBeenCalledTimes(1);
     expect(getByTestId('receiver')).toHaveTextContent(/fake error message/);

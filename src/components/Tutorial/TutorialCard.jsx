@@ -18,6 +18,7 @@ class TutorialCard extends React.Component {
       isPublic,
       isComingSoon,
       timeToComplete,
+      id,
       title,
       path,
       summary,
@@ -70,8 +71,8 @@ class TutorialCard extends React.Component {
         </Card.Content>
         <Card.Content>
           <Card.Meta className="left floated">
-            {!userAuthenticated && (
-              <TutorialProgressIndicator complete={false} entityId={1} />
+            {userAuthenticated && (
+              <TutorialProgressIndicator complete={false} entityId={id} />
             )}
             {hasText && (
               <Icon
@@ -100,6 +101,7 @@ class TutorialCard extends React.Component {
 }
 
 TutorialCard.propTypes = {
+  id: PropTypes.string.isRequired,
   // Path to the tutorial relative to application root.
   path: PropTypes.string.isRequired,
   // Title of the tutorial.

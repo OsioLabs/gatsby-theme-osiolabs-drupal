@@ -1,12 +1,15 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
+import { useTutorialList } from './useTutorialList';
 
 /**
  * React hook; Manage the progress for a specified tutorial.
  *
  * @param {boolean} initialValue
  *   Initial progress value. TRUE for completed, FALSE for incomplete.
- * @param {int} entityId
- *   ID of the Drupal entity that this progress is being tracked for.
+ * @param {string} entityId
+ *   UUID of the Drupal entity that this progress is being tracked for.
+ * @param {string} userId
+ *   UUID of the Drupal user that this progress is being tracked for.
  * @returns []
  *   An array with an object representing stateful information about the
  *   progress including:
@@ -17,31 +20,53 @@ import { useCallback, useState } from 'react';
  *  And an instance of the toggleComplete() function bound to this hooks
  *  state. Used to make updates to the progress record.
  */
-export function useProgressIndicator(initialValue, entityId) {
+export default function useProgressIndicator(initialValue, entityId) {
+  const [list, listDispatch] = useTutorialList();
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
   const [complete, setComplete] = useState(initialValue);
 
-  // Create, and return, a function that can be used to update the
-  // current progress record.
-  const toggleComplete = useCallback(async isComplete => {
-    try {
-      setLoading(true);
-      setError(null);
+  // If the progress indicator is initialized without value for complete
+  // indicate that we're working on figuring it out.
+  if (complete === null && loading === false) {
+    setLoading(true);
+  }
 
-      // @todo: make this actually call the API. And update the complete value
-      // as appropriate.
-      const timeout = ms => new Promise(res => setTimeout(res, ms));
-      await timeout(2000);
-      setComplete(isComplete);
-    } catch (e) {
-      setError(e);
-    } finally {
+  // Then see if we can figure out what the value should be.
+  useEffect(() => {
+    if (list.list !== null && typeof list.list[entityId] !== 'undefined') {
+      const newState = list.list[entityId].tutorial_read_state === 'Read';
+      setComplete(newState);
       setLoading(false);
     }
-  }, []);
+  }, [list.list, entityId]);
 
-  return [{ loading, complete, error }, toggleComplete];
+  const markAsRead = () => {
+    setComplete(true);
+    listDispatch({
+      type: 'update',
+      data: {
+        id: entityId,
+        value: {
+          ...list.list[entityId],
+          tutorial_read_state: 'Read',
+        },
+      },
+    });
+  };
+
+  const markAsUnread = () => {
+    setComplete(false);
+    listDispatch({
+      type: 'update',
+      data: {
+        id: entityId,
+        value: {
+          ...list.list[entityId],
+          tutorial_read_state: 'Unread',
+        },
+      },
+    });
+  };
+
+  return [{ loading, complete }, markAsRead, markAsUnread];
 }
-
-export default useProgressIndicator;

@@ -24,12 +24,15 @@ class Tutorial extends React.Component {
   }
 
   render() {
-    const { error, title, summary, body, userAuthenticated } = this.props;
+    const { error, id, title, summary, body, userAuthenticated, currentUserId } = this.props;
 
     return (
       <Container>
         {!userAuthenticated &&
-          <TutorialProgressIndicator complete entityId={1} />
+          <TutorialProgressIndicator
+            currentUserId={currentUserId}
+            entityId={id}
+          />
         }
         <Header as="h1">{title}</Header>
         {error && (
