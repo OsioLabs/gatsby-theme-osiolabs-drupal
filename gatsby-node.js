@@ -86,6 +86,7 @@ exports.createPages = async ({ actions, graphql }) => {
             toPath: path,
             isPermanent: true,
             redirectInBrowser: true,
+            force: true,
           });
         }
 
@@ -140,6 +141,7 @@ exports.createPages = async ({ actions, graphql }) => {
             toPath: path,
             isPermanent: true,
             redirectInBrowser: true,
+            force: true,
           });
         }
 
