@@ -25,7 +25,6 @@ import DrupalOauth from '../../components/drupal-oauth/DrupalOauth';
  *   }
  */
 export async function getDataFromCache() {
-  console.log('getting cached data');
   const cache = LocalCache.create('tutorialList');
 
   // If the cache is empty see if we can populate it.

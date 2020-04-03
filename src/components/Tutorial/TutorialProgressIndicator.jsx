@@ -9,7 +9,15 @@ const TutorialProgressIndicator = ({
   currentUserId,
   ...rest
 }) => {
-  const [progress, markAsRead, markAsUnread] = useProgressIndicator(complete, entityId);
+  // If the user is no logged in there's nothing left to do.
+  if (!currentUserId || currentUserId === 'anon') {
+    return null;
+  }
+
+  const [progress, markAsRead, markAsUnread] = useProgressIndicator(
+    complete,
+    entityId
+  );
 
   if (progress.loading) {
     return (

@@ -17,7 +17,11 @@ function tutorialListReducer(state, action) {
         .isLoggedIn()
         .then(async token => {
           if (token) {
-            const url = `${process.env.GATSBY_DRUPAL_API_ROOT}/api/flaggings_or_whatever...`;
+            const readUnread =
+              action.data.value.tutorial_read_state === 'Read'
+                ? 'read'
+                : 'unread';
+            const url = `${process.env.GATSBY_DRUPAL_API_ROOT}/api/flag/${readUnread}`;
 
             const headers = new Headers({
               Accept: 'application/vnd.api+json',
@@ -26,16 +30,24 @@ function tutorialListReducer(state, action) {
               Authorization: `${token.token_type} ${token.access_token}`,
             });
 
+            const body = {
+              data: {
+                attributes: {
+                  entity_uuid: action.data.id,
+                },
+              },
+            };
+
             const options = {
               method: 'POST',
               headers,
+              body: JSON.stringify(body),
             };
 
-            // @TODO: Make this actually save to Drupal when we know what that
-            // API looks like.
-            console.log('update drupal with the data please!');
-            //const response = await fetch(url, options);
-            //const data = await response.json();
+            const response = await fetch(url, options);
+            const data = await response.json();
+            // @todo: Do we want to do any error handling here? Or just not
+            // worry about it because this isn't critical data?
           }
           return true;
         });
