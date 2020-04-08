@@ -25,12 +25,14 @@ export const withDrupalOauthConsumer = Component => props => (
     {({
       drupalOauthClient,
       userAuthenticated,
+      currentUserId,
       updateAuthenticatedUserState,
     }) => (
       <Component
         {...props}
         drupalOauthClient={drupalOauthClient}
         userAuthenticated={userAuthenticated}
+        currentUserId={currentUserId}
         updateAuthenticatedUserState={updateAuthenticatedUserState}
       />
     )}

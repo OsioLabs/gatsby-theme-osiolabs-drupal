@@ -1,5 +1,6 @@
 import React from 'react';
 import { render, cleanup, waitForElement } from '@testing-library/react';
+import { TutorialListContext } from '../../hooks/useTutorialList';
 
 // Create a mock DrupalOauth instance.
 import DrupalOauth from '../drupal-oauth/DrupalOauth';
@@ -14,6 +15,11 @@ afterEach(cleanup);
 beforeEach(() => {
   fetch.resetMocks();
   drupalOauthClient.isLoggedIn.mockClear();
+  window.IntersectionObserver = jest.fn(function() {
+    this.observe = jest.fn();
+    this.unobserve = jest.fn();
+    this.disconnect = jest.fn();
+  });
 });
 
 const props = {
@@ -36,6 +42,17 @@ const MockTeaserTutorial = () => <div>Teaser ...</div>;
 const MockLoadingTutorial = () => <div>Loading ...</div>;
 
 const MockComingSoonTutorial = () => <div>Coming soon ...</div>;
+
+const wrapper = ({ children }) => (
+  <TutorialListContext.Provider
+    currentUserId="UUID-123"
+    value={{
+      list: { list: null },
+    }}
+  >
+    {children}
+  </TutorialListContext.Provider>
+);
 
 describe('Component: <DrupalTutorial />', () => {
   it('works when data is retrieved from an API', async () => {
@@ -67,13 +84,15 @@ describe('Component: <DrupalTutorial />', () => {
         comingSoonComponent={MockComingSoonTutorial}
         tutorialAccess="membership_required"
         {...props}
-      />
+      />,
+      { wrapper }
     );
 
     // Verify that first you see a loading message.
     expect(getByText('Loading ...')).toBeTruthy();
 
     // Then API calls should complete and we should see the returned data.
+    // See the <AutomaticProgressTracker /> code in DrupalTutorial.jsx.
     await waitForElement(() => getByText(/Processed body content/));
 
     // Verify our API methods are called.
@@ -87,6 +106,9 @@ describe('Component: <DrupalTutorial />', () => {
       'href="//example.com/tutorial/one"'
     );
     expect(container.firstChild).toHaveTextContent('href="/tutorial/one"');
+
+    // Verify the tutorial progress automatic tracking code has been added.
+    expect(window.IntersectionObserver).toHaveBeenCalledTimes(1);
   });
 
   it('displays an error if there are errors while accessing the API', async () => {
@@ -101,7 +123,8 @@ describe('Component: <DrupalTutorial />', () => {
         comingSoonComponent={MockComingSoonTutorial}
         tutorialAccess="membership_required"
         {...props}
-      />
+      />,
+      { wrapper }
     );
 
     expect(getByText('Loading ...')).toBeTruthy();
@@ -125,7 +148,8 @@ describe('Component: <DrupalTutorial />', () => {
         {...props}
         userAuthenticated={false}
         tutorialAccess="membership_required"
-      />
+      />,
+      { wrapper }
     );
 
     await waitForElement(() => getByText('Teaser ...'));
@@ -150,7 +174,8 @@ describe('Component: <DrupalTutorial />', () => {
         userAuthenticated={false}
         tutorialAccess="public"
         body="<p>Peanut butter ice-cream is the best.</p>"
-      />
+      />,
+      { wrapper }
     );
 
     expect(getByText(/Peanut butter ice-cream/)).toBeTruthy();
@@ -167,7 +192,8 @@ describe('Component: <DrupalTutorial />', () => {
         {...props}
         userAuthenticated={false}
         tutorialAccess="coming_soon"
-      />
+      />,
+      { wrapper }
     );
 
     await waitForElement(() => getByText('Coming soon ...'));

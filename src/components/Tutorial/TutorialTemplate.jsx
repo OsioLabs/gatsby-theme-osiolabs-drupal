@@ -1,3 +1,12 @@
+/**
+ * @file
+ * This file is intended primarly as a demo, and should probably be overridden in each specific site.
+ *
+ * This demo is however functional for testing purposes.
+ *
+ * In a real site you probably want to creat a Layout component that sets up the OAuth Context using
+ * withOauthProvider() as shown below.
+ */
 import React from 'react';
 import { Link } from 'gatsby';
 import { Container, Grid, Menu } from 'semantic-ui-react';

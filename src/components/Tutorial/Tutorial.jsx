@@ -5,6 +5,7 @@ import { Container, Header, Label } from 'semantic-ui-react';
 // Styling for code syntax highlighting.
 import Prism from 'prismjs';
 import TutorialAccessDenied from './TutorialAccessDenied';
+import TutorialProgressIndicator from './TutorialProgressIndicator';
 
 require('prismjs/themes/prism.css');
 
@@ -23,10 +24,16 @@ class Tutorial extends React.Component {
   }
 
   render() {
-    const { error, title, summary, body } = this.props;
+    const { error, id, title, summary, body, userAuthenticated, currentUserId } = this.props;
 
     return (
       <Container>
+        {!userAuthenticated &&
+          <TutorialProgressIndicator
+            currentUserId={currentUserId}
+            entityId={id}
+          />
+        }
         <Header as="h1">{title}</Header>
         {error && (
           // eslint-disable-next-line react/jsx-one-expression-per-line

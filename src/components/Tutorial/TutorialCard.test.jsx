@@ -8,6 +8,7 @@ describe('Component: <TutorialCard />', () => {
     // Basic snapshot test.
     const { asFragment, getByText, queryByText } = render(
       <TutorialCard
+        id="UUID-1"
         title="Tacos Rock"
         path="/tutorial/tacos"
         summary="This is some text. And it's long."
@@ -24,6 +25,7 @@ describe('Component: <TutorialCard />', () => {
     // Basic snapshot test.
     const { getByText } = render(
       <TutorialCard
+        id="UUID-1"
         title="Tacos Rock"
         path="/tutorial/tacos"
         summary="This is some text. And it's long."

@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, waitForElement } from '@testing-library/react';
 
 // MyAccountLink requires DrupalOauthProvider context to work, which requires an
 // instance of DrupalOauth. So we import those, and create a mock.
@@ -16,9 +16,13 @@ const TestElement = withDrupalOauthProvider(drupalOauthClient, () => (
 ));
 
 describe('<MyAccountLink />', () => {
-  it('renders correctly', () => {
+  it('renders correctly', async () => {
     // Basic snapshot test.
-    const { asFragment } = render(<TestElement />);
+    const { asFragment, getByText } = render(<TestElement />);
+    // This is required because we want to wait for the withOauthProvider()
+    // function to finish figuring out if the user is logged in or not. Which,
+    // triggers a state change after it happens.
+    await waitForElement(() => getByText('My account'));
     const firstRender = asFragment();
     expect(firstRender).toMatchSnapshot();
   });

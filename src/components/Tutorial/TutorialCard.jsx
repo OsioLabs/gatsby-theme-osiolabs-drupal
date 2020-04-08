@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link, navigate } from 'gatsby';
 import { Card, Label, Icon } from 'semantic-ui-react';
+import TutorialProgressIndicator from './TutorialProgressIndicator';
 
 class TutorialCard extends React.Component {
   onClick = event => {
@@ -17,6 +18,7 @@ class TutorialCard extends React.Component {
       isPublic,
       isComingSoon,
       timeToComplete,
+      id,
       title,
       path,
       summary,
@@ -69,6 +71,9 @@ class TutorialCard extends React.Component {
         </Card.Content>
         <Card.Content>
           <Card.Meta className="left floated">
+            {userAuthenticated && (
+              <TutorialProgressIndicator complete={false} entityId={id} />
+            )}
             {hasText && (
               <Icon
                 name="file text"
@@ -96,6 +101,7 @@ class TutorialCard extends React.Component {
 }
 
 TutorialCard.propTypes = {
+  id: PropTypes.string.isRequired,
   // Path to the tutorial relative to application root.
   path: PropTypes.string.isRequired,
   // Title of the tutorial.

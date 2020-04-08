@@ -1,7 +1,7 @@
 {
   "name": "gatsby-theme-osiolabs-drupal",
   "description": "Base theme for integrating with members.osiolabs.com.",
-  "version": "1.0.5",
+  "version": "1.1.0",
   "author": "Joe Shindelar <joe@osiolabs.com>",
   "main": "index.js",
   "dependencies": {
@@ -11,19 +11,22 @@
     "gatsby-plugin-catch-links": "^2.0.9",
     "gatsby-plugin-compile-es6-packages": "^1.1.0",
     "gatsby-plugin-react-helmet": "^3.0.0",
+    "gatsby-plugin-sharp": "^2.2.36",
     "gatsby-source-drupal": "^3.0.10",
+    "gatsby-transformer-sharp": "^2.3.2",
     "prismjs": "^1.15.0",
     "prop-types": "^15.7.2",
     "qs": "^6.7.0",
     "react-helmet": "^5.2.0",
+    "react-intersection-observer": "^8.26.1",
     "react-oauth-flow": "^1.2.0",
-    "semantic-ui-react": "^0.86.0"
+    "semantic-ui-react": "^0.88.1"
   },
   "peerDependencies": {
     "gatsby": "^2.13.62",
     "react": "^16.5",
     "react-dom": "^16.5",
-    "semantic-ui-react": "^0.86.0"
+    "semantic-ui-react": "^0.86"
   },
   "keywords": [
     "gatsby"
@@ -40,7 +43,8 @@
   "devDependencies": {
     "@babel/core": "^7.1.5",
     "@testing-library/jest-dom": "^4.0.0",
-    "@testing-library/react": "^9.1.1",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/react-hooks": "^3.2.1",
     "babel-core": "^7.0.0-0",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^23.6.0",
@@ -58,7 +62,8 @@
     "jest-fetch-mock": "^1.7.4",
     "prettier": "^1.17.0",
     "react": "^16.11.0",
-    "react-dom": "^16.11.0"
+    "react-dom": "^16.11.0",
+    "react-test-renderer": "^16.11.0"
   },
   "repository": {
     "type": "git",

@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { InView } from 'react-intersection-observer';
+import useProgressIndicator from '../../hooks/useProgressIndicator';
 
 /**
  * Fix internal links.
@@ -28,10 +30,42 @@ function fixLinks(string) {
 }
 
 /**
+ * Utility component that marks tutorial as read whenever it comes into view.
+ *
+ * Place this after the end of the tutorial to automatically update a
+ * previously unread tutorial to read when this comes into the viewport.
+ */
+const AutomaticProgressTracker = ({ entityId, currentReadState }) => {
+  const [progress, markAsRead, markAsUnread] = useProgressIndicator(
+    currentReadState,
+    entityId
+  );
+
+  return (
+    <InView
+      as="div"
+      threshold={0}
+      // Give a 400px buffer for "complete".
+      rootMargin="0px 0px 400px 0px"
+      onChange={inView => {
+        if (inView && progress.complete !== true) {
+          markAsRead();
+        }
+      }}
+    />
+  );
+};
+
+/**
  * Component to display content for anon users.
  */
 const AnonTutorial = props => {
-  const { tutorialAccess, teaserComponent, tutorialComponent, comingSoonComponent } = props;
+  const {
+    tutorialAccess,
+    teaserComponent,
+    tutorialComponent,
+    comingSoonComponent,
+  } = props;
 
   if (props.summary.processed) {
     props.summary.processed = fixLinks(props.summary.processed);
@@ -83,9 +117,7 @@ class AuthenticatedTutorial extends React.Component {
    */
   getTutorial = async () => {
     const { props } = this;
-    const url = `${process.env.GATSBY_DRUPAL_API_ROOT}/api/node/tutorial/${
-      props.id
-    }`;
+    const url = `${process.env.GATSBY_DRUPAL_API_ROOT}/api/node/tutorial/${props.id}`;
 
     let data;
     let token;
@@ -174,22 +206,24 @@ class AuthenticatedTutorial extends React.Component {
       loadingComponent,
       comingSoonComponent,
       tutorialComponent,
-      ...props
+      ...propsToPassDown
     } = this.props;
     const { processing, data, error } = this.state;
+
+    const currentReadState = data ? data.attributes.tutorial_read_state : false;
 
     let bodyContent;
     if (data && data.attributes.body.processed) {
       bodyContent = data.attributes.body.processed;
     } else {
-      bodyContent = fixLinks(props.body);
+      bodyContent = fixLinks(propsToPassDown.body);
     }
 
     // Display the coming soon version if it's flagged as such.
     if (tutorialAccess === 'coming_soon') {
       return React.createElement(comingSoonComponent, {
-        ...props,
-        body: fixLinks(props.body),
+        ...propsToPassDown,
+        body: fixLinks(propsToPassDown.body),
       });
     }
 
@@ -197,25 +231,30 @@ class AuthenticatedTutorial extends React.Component {
     // display the processing placeholder tutorial.
     if (processing) {
       return React.createElement(loadingComponent, {
-        ...props,
+        ...propsToPassDown,
         body: bodyContent,
         error,
       });
     }
 
     // Display the full tutorial.
-    return React.createElement(tutorialComponent, {
-      ...props,
-      body: bodyContent,
-      error,
-    });
+    const C = tutorialComponent;
+    return (
+      <>
+        <C {...propsToPassDown} body={bodyContent} error={error} />
+        <AutomaticProgressTracker
+          currentReadState={currentReadState}
+          entityId={propsToPassDown.id}
+        />
+      </>
+    );
   }
 }
 
 /**
  * Wrapper component used to toggle between authenticated/anon user display.
  */
-const DrupalTutorial = ({userAuthenticated, ...props}) => {
+const DrupalTutorial = ({ userAuthenticated, ...props }) => {
   if (userAuthenticated) {
     return (
       <AuthenticatedTutorial userAuthenticated={userAuthenticated} {...props} />

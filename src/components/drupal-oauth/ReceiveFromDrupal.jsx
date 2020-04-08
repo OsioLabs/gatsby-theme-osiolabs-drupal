@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import qs from 'qs';
 import {OauthReceiver} from 'react-oauth-flow';
 import withCurrentLocation from '../withCurrentLocation';
 import withDrupalOauthConsumer from './withDrupalOauthConsumer';

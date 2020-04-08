@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import DrupalOauthContext from './DrupalOauthContext';
 
 /**
@@ -15,46 +15,65 @@ import DrupalOauthContext from './DrupalOauthContext';
  *   context.
  *
  * @param {*} client
- *   And instance of the drupalOAuth class from drupalOAuth.js that has already
+ *   An instance of the drupalOAuth class from drupalOAuth.js that has already
  *   been initialized.
  * @param {*} Component
  *   The child component to wrap with the new context provider.
  */
-const withDrupalOauthProvider = (client, Component) => {
-  class WithDrupalOauthProvider extends React.Component {
-    constructor(props) {
-      super(props);
+const withDrupalOauthProvider = (client, Component) => props => {
+  const [isAuthenticated, setUserAuthenticated] = useState(false);
+  const [oauthClient, changeOauthClient] = useState(client);
+  const [currentUserId, setUserId] = useState(null);
 
-      this.state = {
-        userAuthenticated: false,
-        drupalOauthClient: client,
-        updateAuthenticatedUserState: newState => {
-          this.setState({ userAuthenticated: newState });
-        },
-      };
+  // Figure out if the user is logged in or not. Wrap in useEffect so that we
+  // only call this when the isAuthenticated state changes.
+  useEffect(() => {
+    oauthClient
+      .isLoggedIn(setUserAuthenticated)
+      .then(async token => {
+        if (token !== false) {
+          // Get the Drupal ID of the current user if we can.
+          try {
+            const url = `${process.env.GATSBY_DRUPAL_API_ROOT}/api`;
+            const headers = new Headers({
+              Accept: 'application/vnd.api+json',
+              'Content-Type': 'application/vnd.api+json',
+              Authorization: `${token.token_type} ${token.access_token}`,
+              'X-Consumer-ID': `${process.env.GATSBY_DRUPAL_API_ID}`,
+            });
 
-      this.state.drupalOauthClient
-        .isLoggedIn(this.state.updateAuthenticatedUserState)
-        .then(token => {
-          if (token !== false) {
-            this.setState({ userAuthenticated: true });
+            const options = {
+              method: 'GET',
+              headers,
+            };
+
+            const response = await fetch(url, options);
+            const data = await response.json();
+            setUserAuthenticated(true);
+            setUserId(data.meta.links.me.meta.id);
+          } catch (e) {
+            // noop.
           }
-        })
-        .catch(error => {
-          this.setState({ userAuthenticated: false });
-        });
-    }
+        }
+      })
+      // eslint-disable-next-line no-unused-vars
+      .catch(error => {
+        setUserId('anon');
+      });
+  }, [isAuthenticated]);
 
-    render() {
-      return (
-        <DrupalOauthContext.Provider value={this.state}>
-          <Component {...this.props} />
-        </DrupalOauthContext.Provider>
-      );
-    }
-  }
-
-  return WithDrupalOauthProvider;
+  return (
+    <DrupalOauthContext.Provider
+      value={{
+        userAuthenticated: isAuthenticated,
+        currentUserId: currentUserId,
+        drupalOauthClient: oauthClient,
+        updateAuthenticatedUserState: setUserAuthenticated,
+      }}
+    >
+      <Component {...props} />
+    </DrupalOauthContext.Provider>
+  );
 };
 
 export default withDrupalOauthProvider;

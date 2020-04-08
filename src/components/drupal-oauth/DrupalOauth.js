@@ -20,6 +20,19 @@ class DrupalOauth {
   }
 
   /**
+   * Create a new OAuth client from a standard set of ENV variables.
+   *
+   * @returns {DrupalOauth}
+   */
+  static createFromEnvironment() {
+    return new DrupalOauth({
+      drupal_root: process.env.GATSBY_DRUPAL_API_ROOT,
+      client_id: process.env.GATSBY_DRUPAL_API_ID,
+      client_secret: process.env.GATSBY_DRUPAL_API_SECRET,
+    });
+  }
+
+  /**
    * Check to see if the current user is logged in.
    *
    * If the user was previously logged in but their access token is expired
