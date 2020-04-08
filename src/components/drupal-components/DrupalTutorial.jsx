@@ -35,10 +35,10 @@ function fixLinks(string) {
  * Place this after the end of the tutorial to automatically update a
  * previously unread tutorial to read when this comes into the viewport.
  */
-const AutomaticProgressTracker = ({ entityUUID, currentReadState }) => {
+const AutomaticProgressTracker = ({ entityId, currentReadState }) => {
   const [progress, markAsRead, markAsUnread] = useProgressIndicator(
     currentReadState,
-    entityUUID
+    entityId
   );
 
   return (
