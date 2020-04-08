@@ -9,7 +9,7 @@ const TutorialProgressIndicator = ({
   currentUserId,
   ...rest
 }) => {
-  // If the user is no logged in there's nothing left to do.
+  // If the user is not logged in there's nothing left to do.
   if (!currentUserId || currentUserId === 'anon') {
     return null;
   }
