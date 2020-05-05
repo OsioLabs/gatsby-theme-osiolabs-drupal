@@ -4,7 +4,7 @@ import { useTutorialList } from './useTutorialList';
 /**
  * React hook; Manage the progress for a specified tutorial.
  *
- * @param {boolean} initialValue
+ * @param {string} initialValue
  *   Initial progress value. TRUE for completed, FALSE for incomplete.
  * @param {string} entityId
  *   UUID of the Drupal entity that this progress is being tracked for.
@@ -38,7 +38,9 @@ export default function useProgressIndicator(initialValue, entityId) {
       setComplete(newState);
       setLoading(false);
     }
-  }, [list.list, entityId]);
+    // @FIXME Math.random() as a dependency here is a total hack,
+    // but it at least gets things working for now.
+  }, [list.list, entityId, Math.random()]);
 
   const markAsRead = () => {
     setComplete(true);
