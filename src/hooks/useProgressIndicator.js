@@ -31,6 +31,14 @@ export default function useProgressIndicator(initialValue, entityId, userId) {
     setLoading(true);
   }
 
+  function userReadState(userId, entityId) {
+    if (list.list !== null && typeof list.list[entityId] !== 'undefined') {
+      return list.list[entityId].tutorial_read_state;
+    }
+
+    return null;
+  }
+
   // Then see if we can figure out what the value should be.
   useEffect(() => {
     if (list.list !== null && typeof list.list[entityId] !== 'undefined') {
@@ -38,7 +46,7 @@ export default function useProgressIndicator(initialValue, entityId, userId) {
       setComplete(newState);
       setLoading(false);
     }
-  }, [list.list, entityId, userReadState(userId, entityId)]);
+  }, [userReadState(userId, entityId)]);
 
   const markAsRead = () => {
     setComplete(true);
@@ -67,12 +75,6 @@ export default function useProgressIndicator(initialValue, entityId, userId) {
       },
     });
   };
-
-  function userReadState(userId, entityId) {
-    if (list.list !== null && typeof list.list[entityId] !== 'undefined') {
-      return list.list[entityId].tutorial_read_state;
-    }
-  }
 
   return [{ loading, complete }, markAsRead, markAsUnread];
 }
