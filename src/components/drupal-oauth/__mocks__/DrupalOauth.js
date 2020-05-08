@@ -17,4 +17,6 @@ const mock = jest.fn().mockImplementation(() => ({
   storeToken: jest.fn(),
 }));
 
+mock.createFromEnvironment = jest.fn().mockImplementation(mock);
+
 export default mock;
