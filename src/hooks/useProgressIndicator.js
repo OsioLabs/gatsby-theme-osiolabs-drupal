@@ -20,7 +20,7 @@ import { useTutorialList } from './useTutorialList';
  *  And an instance of the toggleComplete() function bound to this hooks
  *  state. Used to make updates to the progress record.
  */
-export default function useProgressIndicator(initialValue, entityId) {
+export default function useProgressIndicator(initialValue, entityId, userId) {
   const [list, listDispatch] = useTutorialList();
   const [loading, setLoading] = useState(false);
   const [complete, setComplete] = useState(initialValue);
@@ -31,6 +31,14 @@ export default function useProgressIndicator(initialValue, entityId) {
     setLoading(true);
   }
 
+  function userReadState() {
+    if (list.list !== null && typeof list.list[entityId] !== 'undefined') {
+      return list.list[entityId].tutorial_read_state;
+    }
+
+    return null;
+  }
+
   // Then see if we can figure out what the value should be.
   useEffect(() => {
     if (list.list !== null && typeof list.list[entityId] !== 'undefined') {
@@ -38,7 +46,7 @@ export default function useProgressIndicator(initialValue, entityId) {
       setComplete(newState);
       setLoading(false);
     }
-  }, [list.list, entityId]);
+  }, [userReadState()]);
 
   const markAsRead = () => {
     setComplete(true);

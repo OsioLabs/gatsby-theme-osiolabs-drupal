@@ -16,7 +16,8 @@ const TutorialProgressIndicator = ({
 
   const [progress, markAsRead, markAsUnread] = useProgressIndicator(
     complete,
-    entityId
+    entityId,
+    currentUserId
   );
 
   if (progress.loading) {

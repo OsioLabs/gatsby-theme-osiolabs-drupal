@@ -83,7 +83,6 @@ class LocalCache {
    */
   bulkAdd(data) {
     this.data = data;
-    console.log('data ata data');
     localStorage.setItem(this.bin, JSON.stringify(this.data));
   }
 
