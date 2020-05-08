@@ -31,7 +31,7 @@ export default function useProgressIndicator(initialValue, entityId, userId) {
     setLoading(true);
   }
 
-  function userReadState(userId, entityId) {
+  function userReadState() {
     if (list.list !== null && typeof list.list[entityId] !== 'undefined') {
       return list.list[entityId].tutorial_read_state;
     }
@@ -46,7 +46,7 @@ export default function useProgressIndicator(initialValue, entityId, userId) {
       setComplete(newState);
       setLoading(false);
     }
-  }, [userReadState(userId, entityId)]);
+  }, [userReadState()]);
 
   const markAsRead = () => {
     setComplete(true);
