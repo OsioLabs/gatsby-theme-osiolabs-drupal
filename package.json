@@ -26,7 +26,7 @@
     "gatsby": "^2.13.62",
     "react": "^16.5",
     "react-dom": "^16.5",
-    "semantic-ui-react": "^0.86"
+    "semantic-ui-react": "^0.88.1"
   },
   "keywords": [
     "gatsby"
