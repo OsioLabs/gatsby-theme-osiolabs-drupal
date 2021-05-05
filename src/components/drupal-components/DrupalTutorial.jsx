@@ -67,14 +67,11 @@ const AnonTutorial = props => {
     comingSoonComponent,
   } = props;
 
-  if (props.summary.processed) {
-    props.summary.processed = fixLinks(props.summary.processed);
-  }
-
   // Display the coming soon version if it's flagged as such.
   if (tutorialAccess === 'coming_soon') {
     return React.createElement(comingSoonComponent, {
       ...props,
+      summary: fixLinks(props.summary),
       body: fixLinks(props.body),
     });
   }
@@ -83,12 +80,14 @@ const AnonTutorial = props => {
   if (tutorialAccess === 'public') {
     return React.createElement(tutorialComponent, {
       ...props,
+      summary: fixLinks(props.summary),
       body: fixLinks(props.body),
     });
   }
 
   return React.createElement(teaserComponent, {
     ...props,
+    summary: fixLinks(props.summary),
     body: fixLinks(props.body),
   });
 };
