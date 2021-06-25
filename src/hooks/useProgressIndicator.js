@@ -32,7 +32,7 @@ export default function useProgressIndicator(initialValue, entityId, userId) {
   }
 
   function userReadState() {
-    if (list.list !== null && typeof list.list[entityId] !== 'undefined') {
+    if (list.list !== null && typeof list.list[entityId] !== 'undefined' && typeof list.list[entityId].tutorial_read_state !== 'undefined') {
       return list.list[entityId].tutorial_read_state;
     }
 
