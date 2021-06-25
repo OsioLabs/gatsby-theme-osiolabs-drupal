@@ -44,12 +44,8 @@ export default function useProgressIndicator(initialValue, entityId, userId) {
     if (list.list !== null && typeof list.list[entityId] !== 'undefined' && typeof list.list[entityId].tutorial_read_state !== 'undefined') {
       const newState = list.list[entityId].tutorial_read_state === 'Read';
       setComplete(newState);
-      setLoading(false);
     }
-    else {
-      setComplete(false);
-      setLoading(false);
-    }
+    setLoading(false);
   }, [userReadState()]);
 
   const markAsRead = () => {
