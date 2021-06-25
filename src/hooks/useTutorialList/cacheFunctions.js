@@ -43,7 +43,16 @@ export async function getDataFromCache() {
     try {
       // The page[limit] is set to 30,000 which should be way more than the
       // most tutorials we'll ever have.
-      const url = `${process.env.GATSBY_DRUPAL_API_ROOT}/api/node/tutorial?filter[consumer.label][value]=heynode.com&fields[node--tutorial]=nid,title,tutorial_read_state&page[limit]=30000`;
+      let url;
+
+      // Use a different URL that doesn't include the tutorial_read_state field
+      // if the user is logged. This allows the anon user API request to be
+      //cached.
+      if (token) {
+        url = `${process.env.GATSBY_DRUPAL_API_ROOT}/api/node/tutorial?filter[consumer.label][value]=heynode.com&fields[node--tutorial]=nid,title,tutorial_read_state&page[limit]=30000`;
+      } else {
+        url = `${process.env.GATSBY_DRUPAL_API_ROOT}/api/node/tutorial?filter[consumer.label][value]=heynode.com&fields[node--tutorial]=nid,title&page[limit]=30000`;
+      }
 
       const headers = new Headers({
         Accept: 'application/vnd.api+json',
