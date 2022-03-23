@@ -67,6 +67,10 @@ describe('Component: <DrupalTutorial />', () => {
               processed:
                 'Processed body content + <p>Text with <a href="//example.com/tutorial/one">a link</a>',
             },
+            summary: {
+              processed:
+                'Processed summary content + <p>Text with <a href="//example.com/tutorial/one">a link</a>',
+            },
           },
         },
       })

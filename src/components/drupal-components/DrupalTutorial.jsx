@@ -218,10 +218,18 @@ class AuthenticatedTutorial extends React.Component {
       bodyContent = fixLinks(propsToPassDown.body);
     }
 
+    let summaryContent;
+    if (data && data.attributes.summary.processed) {
+      summaryContent = data.attributes.summary.processed;
+    } else {
+      summaryContent = fixLinks(propsToPassDown.summary);
+    }
+
     // Display the coming soon version if it's flagged as such.
     if (tutorialAccess === 'coming_soon') {
       return React.createElement(comingSoonComponent, {
         ...propsToPassDown,
+        summary: fixLinks(propsToPassDown.summary),
         body: fixLinks(propsToPassDown.body),
       });
     }
@@ -231,6 +239,7 @@ class AuthenticatedTutorial extends React.Component {
     if (processing) {
       return React.createElement(loadingComponent, {
         ...propsToPassDown,
+        summary: fixLinks(propsToPassDown.summary),
         body: bodyContent,
         error,
       });
@@ -240,7 +249,7 @@ class AuthenticatedTutorial extends React.Component {
     const C = tutorialComponent;
     return (
       <>
-        <C {...propsToPassDown} body={bodyContent} error={error} />
+        <C {...propsToPassDown} body={bodyContent} summary={summaryContent} error={error} />
         <AutomaticProgressTracker
           currentReadState={currentReadState}
           entityId={propsToPassDown.id}
