@@ -36,7 +36,11 @@ const TutorialListProvider = ({ children, currentUserId }) => {
         purgeDataFromCache();
       }
 
-      getDataFromCache().then(data => dispatch({ type: 'initialize', data }));
+      // If this is an anon user we don't need to bother pinging the API for
+      // personalization data.
+      if (currentUserId !== 'anon') {
+        getDataFromCache().then(data => dispatch({ type: 'initialize', data }));
+      }
     }
   }, [currentUserId]);
 

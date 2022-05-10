@@ -29,7 +29,8 @@ describe('<TutorialListProvider />', () => {
     );
 
     await wait(() => getByText('Hello world'));
-    expect(getDataFromCache).toHaveBeenCalledTimes(1);
+    // We don't get data for anon users.
+    expect(getDataFromCache).toHaveBeenCalledTimes(0);
     expect(purgeDataFromCache).toHaveBeenCalledTimes(0);
 
     // Change the currentUserId, using rerender is the same as updating the
@@ -43,7 +44,7 @@ describe('<TutorialListProvider />', () => {
     );
 
     await wait(() => getByText('Hello world'));
-    expect(getDataFromCache).toHaveBeenCalledTimes(2);
+    expect(getDataFromCache).toHaveBeenCalledTimes(1);
     expect(purgeDataFromCache).toHaveBeenCalledTimes(1);
   });
 });
